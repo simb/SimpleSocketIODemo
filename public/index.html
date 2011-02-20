@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+	<head>
+		<title>
+			Socket Demo
+		</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			WEB_SOCKET_SWF_LOCATION = 'socket.io/lib/vendor/web-socket-js/WebSocketMain.swf';
+		</script>
+		<script src="http://192.168.0.3:8124/socket.io/socket.io.js" type="text/javascript"></script>
+		<script type="text/javascript">
+		
+		var socket;
+
+		$(function(){
+		// Create SocketIO instance, connect
+			socket = new io.Socket('192.168.0.3',{
+				port: 8124
+				
+			});
+			socket.connect(); 
+
+			// Add a connect listener
+			socket.on('connect',function() {
+				console.log('Client has connected to the server!');
+			});
+			// Add a connect listener
+			socket.on('message',function(data) {
+				console.log('Received a message from the server!',data);
+			});
+			// Add a disconnect listener
+			socket.on('disconnect',function() {
+				console.log('The client has disconnected!');
+			});
+
+			// Sends a message to the server via sockets
+			
+		});
+		
+		function sendMessageToServer(message) {
+			socket.send(message);
+		}
+		</script>
+	</head>
+	<body>
+		<form>
+			<input type="text" id="src"> <input type="button" onclick="sendMessageToServer( $('#src').val() )">
+		</form>
+	</body>
+</html>
