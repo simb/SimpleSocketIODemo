@@ -26,7 +26,7 @@ var socket = io.listen(server);
 	  });
 	  client.on('disconnect',function(){
 	    //clearInterval(interval);
-	    console.log('Server has disconnected');
+	    console.log('Client has disconnected');
 	  });
 	
 	
